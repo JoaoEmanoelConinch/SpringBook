@@ -1,5 +1,6 @@
 package br.com.senior.springbook.controller.usuario;
 
+import br.com.senior.springbook.exceptions.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +22,18 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioMapper usuarioMapper;
+    private String string;
 
     @PostMapping
-    public ResponseEntity<UsuarioDto> post(@RequestBody UsuarioDto usuarioDto){
+    public ResponseEntity<UsuarioDto> post(@RequestBody UsuarioDto usuarioDto) {
+        if (usuarioDto.nome == null || usuarioDto.senha == null) {
+            throw new LoginException("Nome ou senha inválidos!");
+        }
+
         UsuarioEntity usuarioEntity = usuarioMapper.toEntity(usuarioDto);
-        UsuarioDto usuarioDtoRespose = usuarioMapper.toDto(usuarioRepository.save(usuarioEntity));
-        return ResponseEntity.ok().body(usuarioDtoRespose);
+        UsuarioDto usuarioDtoResponse = usuarioMapper.toDto(usuarioRepository.save(usuarioEntity));
+
+        return ResponseEntity.ok().body(usuarioDtoResponse);
     }
-    
+
 }

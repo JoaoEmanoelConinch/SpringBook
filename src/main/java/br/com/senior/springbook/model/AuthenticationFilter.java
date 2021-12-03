@@ -19,27 +19,27 @@ import org.springframework.stereotype.Component;
 @Profile("prod")
 @Component
 @Order(1)
-public class AuthenticationFilter implements Filter{
+public class AuthenticationFilter implements Filter {
 
     @Autowired
     Environment env;
 
     @Override
     public void doFilter(ServletRequest request, //
-            ServletResponse response, //
-            FilterChain chain)//
-        throws IOException, ServletException {
-        
+                         ServletResponse response, //
+                         FilterChain chain)//
+            throws IOException, ServletException {
+
         final HttpServletRequest servletRequest = (HttpServletRequest) request;
         final String authorization = servletRequest.getHeader("authorization");
 
         //&& env.getActiveProfiles().equals("prod")
-        if(Tokens.tokens.contains(authorization) || servletRequest.getRequestURI().equals("/login")){
+        if (Tokens.tokens.contains(authorization) || servletRequest.getRequestURI().equals("/login") || servletRequest.getRequestURI().equals("/usuario")) {
             chain.doFilter(request, response);
         } else {
             final HttpServletResponse servletResponse = (HttpServletResponse) response;
             servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido");
         }
     }
-    
+
 }

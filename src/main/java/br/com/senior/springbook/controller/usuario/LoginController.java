@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import br.com.senior.springbook.exceptions.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,22 +23,21 @@ import br.com.senior.springbook.model.repository.usuario.UsuarioRepository;
 public class LoginController {
 
     @Autowired
-    private  UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping
     public ResponseEntity<String> login(@RequestBody UsuarioDto usuarioDto) {
-        List<UsuarioEntity>  usuarios = usuarioRepository.findAll();
-        List<UsuarioEntity>  usuariosPedidos = usuarios
-                            .stream()
-                            .filter(e -> (e.getNome().equals(usuarioDto.nome)) && (e.getSenha().equals(usuarioDto.senha)))
-                            .collect(Collectors.toList());
-        if(!usuariosPedidos.isEmpty()){
+        List<UsuarioEntity> usuarios = usuarioRepository.findAll();
+        List<UsuarioEntity> usuariosPedidos = usuarios
+                .stream()
+                .filter(e -> (e.getNome().equals(usuarioDto.nome)) && (e.getSenha().equals(usuarioDto.senha)))
+                .collect(Collectors.toList());
+        if (!usuariosPedidos.isEmpty()) {
             String token = UUID.randomUUID().toString();
             Tokens.tokens.add(token);
             return ResponseEntity.ok().body(token);
         }
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        // throw 
-    } 
-    
+        throw new LoginException("Nome ou senha inválidos!");
+    }
+
 }

@@ -7,15 +7,15 @@ import br.com.senior.springbook.model.entities.usuario.UsuarioEntity;
 
 @Service
 public class UsuarioMapper {
-    
-    public UsuarioDto toDto(UsuarioEntity usuarioEntity){
+
+    public UsuarioDto toDto(UsuarioEntity usuarioEntity) {
         var usuarioDto = new UsuarioDto();
         usuarioDto.nome = usuarioEntity.getNome();
         usuarioDto.senha = usuarioEntity.getSenha();
         return usuarioDto;
     }
 
-    public UsuarioEntity toEntity(UsuarioDto usuarioDto){
+    public UsuarioEntity toEntity(UsuarioDto usuarioDto) {
         var usuarioEntity = new UsuarioEntity();
         usuarioEntity.setNome(usuarioDto.nome);
         usuarioEntity.setSenha(usuarioDto.senha);
