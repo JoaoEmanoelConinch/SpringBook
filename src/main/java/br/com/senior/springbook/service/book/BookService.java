@@ -1,6 +1,7 @@
 package br.com.senior.springbook.service.book;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -31,7 +32,7 @@ public class BookService {
 	        return repo.findAll();
 	    }
 
-	    public List<Book> findBookById(Long id) {
+	    public Optional<Book> findBookById(Long id) {
 	        return repo.findBookById(id);
 	    }
 

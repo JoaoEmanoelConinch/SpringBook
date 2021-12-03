@@ -9,8 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class UsuarioEntity implements Serializable{
-    
+public class UsuarioEntity implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,9 +21,10 @@ public class UsuarioEntity implements Serializable{
     @Column(nullable = false)
     private String senha;
 
-    public UsuarioEntity(){}
+    public UsuarioEntity() {
+    }
 
-    public UsuarioEntity(Long id, String nome, String senha){
+    public UsuarioEntity(Long id, String nome, String senha) {
         setId(id);
         setNome(nome);
         setSenha(senha);
