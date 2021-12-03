@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import br.com.senior.springbook.controller.LoginController;
-import br.com.senior.springbook.controller.UsuarioController;
+import br.com.senior.springbook.controller.usuario.LoginController;
+import br.com.senior.springbook.controller.usuario.UsuarioController;
 import br.com.senior.springbook.model.dto.usuario.UsuarioDto;
 
 public class UsuariComtrolerTest {

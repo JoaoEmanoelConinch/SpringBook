@@ -1,4 +1,4 @@
-package br.com.senior.springbook.controller;
+package br.com.senior.springbook.controller.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

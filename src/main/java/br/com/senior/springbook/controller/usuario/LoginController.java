@@ -1,4 +1,4 @@
-package br.com.senior.springbook.controller;
+package br.com.senior.springbook.controller.usuario;
 
 import java.util.List;
 import java.util.UUID;

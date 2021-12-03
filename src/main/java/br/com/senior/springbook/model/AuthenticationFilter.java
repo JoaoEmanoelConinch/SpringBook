@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+@Profile("prod")
 @Component
 @Order(1)
 public class AuthenticationFilter implements Filter{
@@ -31,8 +33,8 @@ public class AuthenticationFilter implements Filter{
         final HttpServletRequest servletRequest = (HttpServletRequest) request;
         final String authorization = servletRequest.getHeader("authorization");
 
-        if(Tokens.tokens.contains(authorization) || env.getActiveProfiles().equals("prod") //
-                || servletRequest.getRequestURI().equals("/login")){
+        //&& env.getActiveProfiles().equals("prod")
+        if(Tokens.tokens.contains(authorization) || servletRequest.getRequestURI().equals("/login")){
             chain.doFilter(request, response);
         } else {
             final HttpServletResponse servletResponse = (HttpServletResponse) response;
